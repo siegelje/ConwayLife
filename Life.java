@@ -61,7 +61,7 @@ public class Life extends JPanel implements ActionListener, MouseListener, Mouse
         f.setVisible(true);
     }
 
-    private final int GRID_SIZE = 100;  // Number of squares along each side of the board
+    private final int GRID_SIZE = 10;  // Number of squares along each side of the board
     // (Should probably not be less than 10 or more than 200,)
 
     private boolean[][] alive;   // Represents the board.  alive[r][c] is true if the cell in row r, column c is alive.
@@ -133,46 +133,58 @@ public class Life extends JPanel implements ActionListener, MouseListener, Mouse
                 boolean n2 = alive[r][c-1];
                 boolean n3 = alive[r+1][c];
                 boolean n4 = alive[r-1][c];
+                boolean n5 = alive[r-1][c-1];
+                boolean n6 = alive[r+1][c+1];
+                boolean n7 = alive[r-1][c+1];
+                boolean n8 = alive[r+1][c-1];
                 if (alive[r][c] == false)
                 {
                     if (n1 == true && n2 == true && n3 == true && n4 == false)
                     {
-                        alive[r][c] = true;
+                        newboard[r][c] = true;
                     }
-                    if (n2 == true && n3 == true && n4 == true && n1 == false)
+                    else if (n2 == true && n3 == true && n4 == true && n1 == false)
                     {
-                        alive[r][c] = true;
+                        newboard[r][c] = true;
                     }
-                    if (n3 == true && n4 == true && n1 == true && n2 == false)
+                    else if (n3 == true && n4 == true && n1 == true && n2 == false)
                     {
-                        alive[r][c] = true;
+                        newboard[r][c] = true;
                     }
-                    if (n4 == true && n1 == true && n2 == true && n3 == false)
+                    else if (n4 == true && n1 == true && n2 == true && n3 == false)
                     {
-                        alive[r][c] = true;
+                        newboard[r][c] = true;
+                    }
+                    else
+                    {
+                        newboard[r][c] = false;
                     }
                 }
                 if (alive[r][c] == true)
                 {
                     if (n1 == true && n2 == true && n3 == true && n4 == true)
                     {
-                        alive[r][c] = false;
+                        newboard[r][c] = false;
                     }
-                    if (n1 == false && n2 == false && n3 == false && n4 == true)
+                    else if (n1 == false && n2 == false && n3 == false && n4 == true)
                     {
-                        alive[r][c] = false;
+                        newboard[r][c] = false;
                     }
-                    if (n2 == false && n3 == false && n4 == false && n1 == true)
+                    else if (n2 == false && n3 == false && n4 == false && n1 == true)
                     {
-                        alive[r][c] = false;
+                        newboard[r][c] = false;
                     }
-                    if (n3 == false && n4 == false && n1 == false && n2 == true)
+                    else if (n3 == false && n4 == false && n1 == false && n2 == true)
                     {
-                        alive[r][c] = false;
+                        newboard[r][c] = false;
                     }
-                    if (n4 == false && n3 == false && n2 == false && n1 == true)
+                    else if (n4 == false && n3 == false && n2 == false && n1 == true)
                     {
-                        alive[r][c] = false;
+                        newboard[r][c] = false;
+                    }
+                    else
+                    {
+                        newboard[r][c] = true;
                     }
                 }
             }
