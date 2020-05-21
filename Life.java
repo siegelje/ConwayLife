@@ -76,7 +76,6 @@ public class Life extends JPanel implements ActionListener, MouseListener, Mouse
     private JButton  clearButton;   // Button for clearing the board, that is setting all the cells to "dead".
     private JButton  quitButton;    // Button for ending the program.
 
-    
     /**
      * Create a life game board, initially empty.  The number of cells on each side of the grid is GRID_SIZE.
      */
@@ -125,48 +124,58 @@ public class Life extends JPanel implements ActionListener, MouseListener, Mouse
         // implement the game rules -- see top comment
         // start without the wrap around, add the wrap feature after testing the rules in
         // a bounded world.
-        for (int r = 1; r<GRID_SIZE+1; r++)
+
+        for (int r = 1; r<GRID_SIZE-1; r++)
         {
-            for (int c = 1; c<GRID_SIZE+1; c++)
+            for (int c = 1; c<GRID_SIZE-1; c++)
             {
-                if (alive[r][c] == false && alive[r-1][c] == true && alive[r][c-1] == true && alive[r][c+1] == true)
+                boolean n1 = alive[r][c+1];
+                boolean n2 = alive[r][c-1];
+                boolean n3 = alive[r+1][c];
+                boolean n4 = alive[r-1][c];
+                if (alive[r][c] == false)
                 {
-                    alive[r][c] = true;
-                }
-                if (alive[r][c] == false && alive[r+1][c] == true && alive[r][c+1] == true && alive[r][c-1] == true)
-                {
-                    alive[r][c] = true;
-                }
-                if (alive[r][c] == false && alive[r-1][c] == true && alive[r+1][c] == true && alive[r][c+1] == true)
-                {
-                    alive[r][c] = true;
-                }
-                if (alive[r][c] == false && alive[r+1][c] == true && alive[r-1][c] == true && alive[r][c-1] == true)
-                {
-                    alive[r][c] = true;
-                }
-                if (alive[r][c] == true && alive[r-1][c] == true && alive[r][c-1] == true && alive[r][c+1] == true)
-                {
-                    alive[r][c] = true;
-                }
-                if (alive[r][c] == true && alive[r+1][c] == true && alive[r][c+1] == true && alive[r][c-1] == true)
-                {
-                    alive[r][c] = true;
-                }
-                if (alive[r][c] == true && alive[r-1][c] == true && alive[r+1][c] == true && alive[r][c+1] == true)
-                {
-                    alive[r][c] = true;
-                }
-                if (alive[r][c] == true && alive[r+1][c] == true && alive[r-1][c] == true && alive[r][c-1] == true)
-                {
-                    alive[r][c] = true;
+                    if (n1 == true && n2 == true && n3 == true && n4 == false)
+                    {
+                        alive[r][c] = true;
+                    }
+                    if (n2 == true && n3 == true && n4 == true && n1 == false)
+                    {
+                        alive[r][c] = true;
+                    }
+                    if (n3 == true && n4 == true && n1 == true && n2 == false)
+                    {
+                        alive[r][c] = true;
+                    }
+                    if (n4 == true && n1 == true && n2 == true && n3 == false)
+                    {
+                        alive[r][c] = true;
+                    }
                 }
                 if (alive[r][c] == true)
                 {
-                    //going to be 2s here
+                    if (n1 == true && n2 == true && n3 == true && n4 == true)
+                    {
+                        alive[r][c] = false;
+                    }
+                    if (n1 == false && n2 == false && n3 == false && n4 == true)
+                    {
+                        alive[r][c] = false;
+                    }
+                    if (n2 == false && n3 == false && n4 == false && n1 == true)
+                    {
+                        alive[r][c] = false;
+                    }
+                    if (n3 == false && n4 == false && n1 == false && n2 == true)
+                    {
+                        alive[r][c] = false;
+                    }
+                    if (n4 == false && n3 == false && n2 == false && n1 == true)
+                    {
+                        alive[r][c] = false;
+                    }
                 }
             }
-            
         }
         alive = newboard;
     }
